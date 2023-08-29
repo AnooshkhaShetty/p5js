@@ -1,4 +1,9 @@
 let shapes = [];
+let colors = [
+  [0, 154, 205],
+  [51, 204, 102],
+  [255, 221, 0]
+];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -8,7 +13,6 @@ function setup() {
 
 function draw() {
   background(255);
-  moveShapes();
   drawShapes();
 }
 
@@ -18,25 +22,9 @@ function generateShapes() {
     let y = random(height);
     let size = random(10, 100);
     let color = randomColor();
-    let shape = {
-      x: x,
-      y: y,
-      size: size,
-      color: color,
-      speed: random(0.5, 2)
-    };
+    let shape = { x, y, size, color };
     shapes.push(shape);
   }
-}
-
-function moveShapes() {
-  shapes.forEach(shape => {
-    if (shape.x < -shape.size) {
-      shape.x = width + shape.size;
-    } else {
-      shape.x -= shape.speed;
-    }
-  });
 }
 
 function drawShapes() {
@@ -51,8 +39,6 @@ function drawShapes() {
 }
 
 function randomColor() {
-  let r = random(255);
-  let g = random(255);
-  let b = random(255);
-  return color(r, g, b, 50);
+  let color = random(colors);
+  return color.concat(50);
 }
